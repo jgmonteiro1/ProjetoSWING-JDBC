@@ -1,22 +1,17 @@
 package application;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
-import gui.DepartmentListController;
+import model.entities.MyTableModel;
+import model.services.DepartmentService;
 
 public class DepartmentList extends JFrame {
 
@@ -43,16 +38,11 @@ public class DepartmentList extends JFrame {
 	 * Create the frame.
 	 */
 	public DepartmentList() {
-		DepartmentListController DPC = new DepartmentListController();
-		Toolkit kit = Toolkit.getDefaultToolkit();
-		Dimension tela = kit.getScreenSize();
-		double larg = tela.getWidth();
-		double alt = tela.getHeight();
 		
-		double minhaL = larg * 0.7;
-		double minhaA = alt*0.7;
+		DepartmentService service = new DepartmentService();
+		MyTableModel modelo = new MyTableModel(service.findAll());
 		
-		setSize((int)minhaL,(int) minhaA);
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -70,34 +60,20 @@ public class DepartmentList extends JFrame {
 		scrollPane.setBounds(0, 75, 434, 175);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"ID", "Name"
-			}
-		));
+		
+		
+		
+		
+		JTable table = new JTable(modelo);
+		
+			
+		
 		scrollPane.setViewportView(table);
 		
 		
-		JButton btnNew = new JButton("New");
-		btnNew.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				DPC.allCellEditable(table);
-			}
-		});
-		btnNew.setBounds(0, 51, 89, 23);
-		contentPane.add(btnNew);
+				
+		
+		
+		
 	}
 }
