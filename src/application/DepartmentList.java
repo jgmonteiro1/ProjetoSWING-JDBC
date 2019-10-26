@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
 
 import model.entities.MyTableModel;
 import model.services.DepartmentService;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DepartmentList extends JFrame {
 
@@ -69,6 +72,15 @@ public class DepartmentList extends JFrame {
 			
 		
 		scrollPane.setViewportView(table);
+		
+		JButton btnNew = new JButton("New");
+		btnNew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnNew.setBounds(0, 54, 89, 23);
+		contentPane.add(btnNew);
 		
 		
 				
